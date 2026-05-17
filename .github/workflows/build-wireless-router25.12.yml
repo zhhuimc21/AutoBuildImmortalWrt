@@ -517,10 +517,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-
+    # ⭐ 核心：在这里加上这几行权限配置
+    permissions:
+      contents: write  # 赋予创建 Release 和上传资产的写入权限
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set executable permissions
         run: |
@@ -649,7 +651,7 @@ jobs:
           
           
       - name: Upload ImmortalWrt as release assets
-        uses: softprops/action-gh-release@v2.2.1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.profile }}
           name: ImmortalWrt-Wireless
